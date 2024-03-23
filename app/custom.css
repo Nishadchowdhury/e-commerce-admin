@@ -1,0 +1,3 @@
+.flexC {
+  @apply flex items-center justify-center;
+}
