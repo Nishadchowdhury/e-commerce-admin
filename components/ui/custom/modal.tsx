@@ -25,23 +25,13 @@ export const Modal: React.FC<ModalProps> = ({
     children
 }) => {
 
-    const [show, setShow] = useState(false)
+
 
     const onChange = (open: boolean) => {
         if (!open) {
             onClose();
         }
     }
-
-    useEffect(() => {
-        setShow(true)
-    }, [])
-
-
-    if (!show) {
-        return null
-    }
-
     return (
         <Dialog open={isOpen} onOpenChange={onChange}>
             <DialogContent>

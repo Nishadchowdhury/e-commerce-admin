@@ -1,14 +1,26 @@
 'use client'
 
-import { Modal } from "@/components/ui/custom/modal"
+import { useStoreModal } from "@/hooks/zustand/use-store-modal"
+import { useEffect } from "react";
+
 
 export default function SetupPage() {
+
+  const onOpen = useStoreModal((state) => state.onOpen);
+  const onClose = useStoreModal((state) => state.onClose);
+  const isOpen = useStoreModal((state) => state.isOpen);
+
+  useEffect(() => {
+    if (!isOpen) {
+      onOpen()
+    }
+  }, [isOpen, onOpen])
+
+
   return (
     <div>
-      This is a protected route!
-      <Modal title="test" description="Test desc" isOpen onClose={() => { }} >
-        Children
-      </Modal>
-    </div>
+      root Page
+
+    </div >
   )
 }
