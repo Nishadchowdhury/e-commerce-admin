@@ -20,7 +20,6 @@ export default function SetupPage() {
   return (
     <div>
       root Page
-
     </div >
   )
 }
