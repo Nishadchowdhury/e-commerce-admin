@@ -5,7 +5,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
+//forst we need to setup and connect the DB
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+// it's time to create a model
+model Store {
+  id       String   @id @default(uuid())
+  name     String
+  userId   String
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
 }
