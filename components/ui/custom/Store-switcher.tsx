@@ -14,7 +14,7 @@ type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger>
 
 interface StoreSwitcherProps {
     items: Store[];
-    className: string
+    className?: string
 }
 
 function StoreSwitcher({

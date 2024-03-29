@@ -140,7 +140,7 @@ const SettingForm: React.FC<SettingFormProps> = ({
                 </form>
             </Form>
             <Separator />
-            <ApiAlert title="test" description="testD" />
+            <ApiAlert title="test" description="testD" variant="public" />
         </>
     )
 
