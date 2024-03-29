@@ -16,6 +16,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input";
 import { useParams, useRouter } from "next/navigation";
 import AlertModal from "@/components/ui/custom/Alert-modal";
+import ApiAlert from "@/components/ui/custom/Api-alert";
 
 
 interface SettingFormProps {
@@ -138,7 +139,8 @@ const SettingForm: React.FC<SettingFormProps> = ({
 
                 </form>
             </Form>
-
+            <Separator />
+            <ApiAlert title="test" description="testD" />
         </>
     )
 
