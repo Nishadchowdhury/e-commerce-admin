@@ -181,3 +181,15 @@ render={({ field }) => (
 />
 </form>
 </Form>
+
+
+================================================================
+click to copy to the clipboard
+================================================================
+const onCopy = (description: string) => {
+    navigator.clipboard.writeText(description);
+    toast.success("API route copied to the clipboard.");
+}
+
+calling this will do.
+

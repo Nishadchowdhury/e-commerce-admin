@@ -14,9 +14,25 @@ datasource db {
 
 // it's time to create a model
 model Store {
-  id       String   @id @default(uuid())
-  name     String
-  userId   String
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  id        String      @id @default(uuid())
+  name      String
+  userId    String
+  Billboard Billboard[] @relation("StoreToBillboard")
+  createAt  DateTime    @default(now())
+  updateAt  DateTime    @updatedAt
+}
+
+// modle for billboard
+model Billboard {
+  id        String   @id @default(uuid())
+  // relatio the bb with stores. So billboard can only be exist in a specific store.
+  storeId   String // we defined the store id here.
+  store     Store    @relation("StoreToBillboard", fields: [storeId], references: [id])
+  // we defined the relation here. this relation connects to the ralation to the store with the name. It's targetting the fields the storeId.
+  label     String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
 }
