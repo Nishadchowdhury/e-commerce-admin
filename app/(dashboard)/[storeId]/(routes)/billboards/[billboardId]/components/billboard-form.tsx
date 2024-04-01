@@ -16,7 +16,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input";
 import { useParams, useRouter } from "next/navigation";
 import AlertModal from "@/components/ui/custom/Alert-modal";
-import ApiAlert from "@/components/ui/custom/Api-alert";
 import { useOrigin } from "@/hooks/custom/use-origin";
 import ImageUpload from "@/components/ui/custom/image-upload";
 

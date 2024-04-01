@@ -23,7 +23,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     //hydration error solve
     const [isMounted, setIsMounted] = useState(false); useEffect(() => { setIsMounted(true) }, []);
 
-    const onUpload = (result: any) => {
+    const onUpload = (result: any) => { // cloudinary doesn't has typescript so "any" type is needed.
         onChange(result.info.secure_url);
     }
 
@@ -49,42 +49,43 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                                 >
                                     <Trash className="h-4 w-4" />
                                 </Button>
-                               
+
                             </div>
                             <Image
-                                    fill
-                                    className="object-cover"
-                                    alt="Image"
-                                    src={url}
-                                />
+                                fill
+                                className="object-cover"
+                                alt="Image"
+                                src={url}
+                            />
                         </div>
                     )
                 })}
             </div>
 
-            <CldUploadWidget
-                onUpload={onUpload}
-                uploadPreset="qg9ahozx" // it is for security purposes, that who can CRUD on your assets. Signing Mode: "unsigned" // save and out the name of preset here.
+            
+                <CldUploadWidget
+                    onUpload={onUpload}
+                    uploadPreset="qg9ahozx" // it is for security purposes, that who can CRUD on your assets. Signing Mode: "unsigned" // save and out the name of preset here.
+                >
+                    {({ open }) => { // this will render an image uploader of cloudinary through CDN.
+                        const onClick = () => {
+                            open()
+                        }
 
-            >
-                {({ open }) => { // this will render an image uploader of cloudinary through CDN.
-                    const onClick = () => {
-                        open()
-                    }
+                        return (
+                            <Button
+                                type="button"
+                                disabled={disabled}
+                                onClick={onClick}
 
-                    return (
-                        <Button
-                            type="button"
-                            disabled={disabled}
-                            onClick={onClick}
+                            >
+                                <ImagePlus className="h-4 w-4 mr-2" />
+                                Upload an Image
+                            </Button>
+                        )
+                    }}
+                </CldUploadWidget>
 
-                        >
-                            <ImagePlus className="h-4 w-4 mr-2" />
-                            Upload an Image
-                        </Button>
-                    )
-                }}
-            </CldUploadWidget>
         </div>
     )
 

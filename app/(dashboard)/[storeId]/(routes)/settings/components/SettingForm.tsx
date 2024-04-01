@@ -83,7 +83,6 @@ const SettingForm: React.FC<SettingFormProps> = ({
 
     return (
         <>
-
             <AlertModal
                 isOpen={open}
                 onClose={() => setOpen(false)}
@@ -145,8 +144,8 @@ const SettingForm: React.FC<SettingFormProps> = ({
             <Separator />
             <ApiAlert
                 title="NEXT_PUBLIC_API_URL"
-                description={`${origin}/api/${params.storeId}`}
                 variant="public"
+                description={`${origin}/api/${params.storeId}`}
             />
         </>
     )

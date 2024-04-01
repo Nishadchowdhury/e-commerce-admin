@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command";
 
-type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger>
+type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger> // this added by tache but I avoided.
 
 interface StoreSwitcherProps {
     items: Store[];
@@ -64,7 +64,7 @@ function StoreSwitcher({
                 <Command>
                     <CommandList >
                         <CommandInput placeholder="Search store..." />
-                        <CommandEmpty >No store found.</CommandEmpty>
+                        <CommandEmpty ><span className="text-red-500" >No store found.</span></CommandEmpty>
                         <CommandGroup heading="Stores">
                             {formattedItems.map((store) => {
                                 return (
