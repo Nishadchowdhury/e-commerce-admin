@@ -16,7 +16,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input";
 import { useParams, useRouter } from "next/navigation";
 import AlertModal from "@/components/ui/custom/Alert-modal";
-import { useOrigin } from "@/hooks/custom/use-origin";
 import ImageUpload from "@/components/ui/custom/image-upload";
 
 
@@ -40,7 +39,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
     const params = useParams()
     const router = useRouter()
 
-    const origin = useOrigin() //custom
 
 
     const title = initialData ? "Edit billboard" : "Create billboard"
@@ -61,14 +59,22 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
     const onSubmit = async (data: BillboardFormValue) => {
         try {
             setLoading(true);
-            await axios.patch(`/api/stores/${params.storeId}`, data);
+            if (initialData) {
+                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data);
+            } else {
+                await axios.post(`/api/${params.storeId}/billboards`, data);
+            }
+
             router.refresh(); // is refresh the page like hot reload and changes all the things are need to be updated.
-            toast.success("Store updated.")
+            router.push(`/${params.storeId}/billboards`)
+            toast.success(toastMessage)
         } catch (error) {
 
             toast.error("Something went wrong.")
             console.log(error);
         } finally {
+
+
             setLoading(false);
         }
     }
@@ -77,12 +83,12 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/stores/${params.storeId}`)
+            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
             router.refresh();
-            router.push('/')
-            toast.success("Store delete.")
+            router.push(`/${params.storeId}/billboards`)
+            toast.success("Billboard delete.")
         } catch (error) {
-            toast.error("Make sure you removed all the products and category first.");
+            toast.error("Make sure you removed all categories using this billboard first.");
             console.log(error);
         } finally {
             setLoading(false);
