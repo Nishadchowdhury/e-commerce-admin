@@ -18,21 +18,38 @@ model Store {
   name      String
   userId    String
   Billboard Billboard[] @relation("StoreToBillboard")
+  Category  Category[]  @relation("StoreToCategory")
   createAt  DateTime    @default(now())
   updateAt  DateTime    @updatedAt
 }
 
 // modle for billboard
 model Billboard {
-  id        String   @id @default(uuid())
+  id        String     @id @default(uuid())
   // relatio the bb with stores. So billboard can only be exist in a specific store.
   storeId   String // we defined the store id here.
-  store     Store    @relation("StoreToBillboard", fields: [storeId], references: [id])
+  store     Store      @relation("StoreToBillboard", fields: [storeId], references: [id])
   // we defined the relation here. this relation connects to the ralation to the store with the name. It's targetting the fields the storeId.
+  catagory  Category[]
   label     String
   imageUrl  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([storeId])
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  storeId     String
+  store       Store     @relation("StoreToCategory", fields: [storeId], references: [id])
+  billboardId String
+  billboard   Billboard @relation(fields: [billboardId], references: [id])
+
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([storeId])
+  @@index([billboardId])
 }
