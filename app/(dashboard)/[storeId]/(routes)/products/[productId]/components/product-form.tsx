@@ -22,7 +22,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 
 interface ProductFormProps {
-    initialData: Product & { images: Image[] } | null;
+    initialData: Product & { images: Image[] } | null; // this time the type can not be Product only because we're including the images so we have to intersect the product with the image. Because it combines multiple objects into one object.
     categories: Category[];
     sizes: Size[];
     colors: Color[];
@@ -31,8 +31,8 @@ interface ProductFormProps {
 
 const formSchema = z.object({
     name: z.string().min(1),
-    images: z.object({ url: z.string() }).array(),
-    price: z.coerce.number().min(1),
+    images: z.object({ url: z.string() }).array(), // Provide the structure of the object first then tell is it an array.
+    price: z.coerce.number().min(1),// this field is decimal that's why we need to use z.coerce.number instead z.number(). // coerce forces to the input value to be converted as a number.
     categoryId: z.string().min(1),
     colorId: z.string().min(1),
     sizeId: z.string().min(1),
@@ -53,7 +53,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     const params = useParams()
     const router = useRouter()
 
-
+    console.log(initialData?.price, String(initialData?.price));
 
     const title = initialData ? "Edit product" : "Create product"
     const description = initialData ? "Edit a product" : "Add a new product"
@@ -70,6 +70,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
         defaultValues: initialData ? {
             ...initialData,
             price: parseFloat(String(initialData?.price))
+
         } : {
             name: "",
             images: [],
@@ -91,7 +92,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 await axios.post(`/api/${params.storeId}/products`, data);
             }
 
-            router.refresh(); 
+            router.refresh();
             router.push(`/${params.storeId}/products`)
             toast.success(toastMessage)
         } catch (error) {
@@ -166,7 +167,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                                     <FormLabel > Images </FormLabel>
                                     <FormControl>
                                         <ImageUpload
-                                            value={field.value.map((image) => image.url)}
+                                            value={field.value.map((image) => image.url)} //it taking a formatted array from the field. This value is not the value of the field instead of the ImageUpload component.
                                             disabled={loading}
                                             onChange={(url) => field.onChange([...field.value, { url }])}
                                             onRemove={(url) => field.onChange([...field.value.filter((current) => current.url !== url)])}

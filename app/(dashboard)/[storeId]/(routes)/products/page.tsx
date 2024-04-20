@@ -14,7 +14,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
         where: {
             storeId: params.storeId,
         },
-        include: {
+        include: {// include means retrieve all the tables related with the product. in MongoDB it calls populate
             category: true,
             size: true,
             color: true
@@ -32,11 +32,11 @@ const page: React.FC<pageProps> = async ({ params }) => {
         name: item.name,
         isFeatured: item.isFeatured,
         isArchived: item.isArchived,
-        price: formatter.format(item.price.toNumber()),
-        category:  item.category.name,
+        price: formatter.format(item.price.toNumber()), // Price is in decimal so I need to convert to number.
+        category: item.category.name,
         size: item.size.name,
         color: item.color.value,
-        
+
         createdAt: format(item.createdAt, "MMMM do, yyyy")
         // formatting the Date to visible format with "npm i date-fns" (date Data, format type)
     }))

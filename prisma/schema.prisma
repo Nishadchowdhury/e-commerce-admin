@@ -84,9 +84,11 @@ model Color {
   @@index([storeId])
 }
 
+//in product we will have relation with ["store", "category", "size", "color", "image"]
 model Product {
   id String @id @default(uuid())
 
+  //relations
   storeId    String
   categoryId String
   sizeId     String
@@ -96,14 +98,16 @@ model Product {
   size       Size     @relation(fields: [sizeId], references: [id])
   color      Color    @relation(fields: [colorId], references: [id])
 
+  // product object
   name       String
-  price      Decimal
+  price      Decimal //
   isFeatured Boolean  @default(false)
-  isArchived  Boolean  @default(false)
-  images      Image[]
+  isArchived Boolean  @default(false)
+  images     Image[]
   createdAt  DateTime @default(now())
   uodatedAt  DateTime @updatedAt
 
+  // indexing
   @@index([storeId])
   @@index([categoryId])
   @@index([colorId])
@@ -111,9 +115,12 @@ model Product {
 }
 
 model Image {
-  id        String   @id @default(uuid())
+  id        String  @id @default(uuid())
   productId String
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  //one thing that define what happen with the images related with the product after delete the product.
+  // we added onDelete Cascade => means the Prisma checks the relation with cascade relation and delete the associated tables with its perent table.
+
   url       String
   createdAt DateTime @default(now())
   uodatedAt DateTime @updatedAt
