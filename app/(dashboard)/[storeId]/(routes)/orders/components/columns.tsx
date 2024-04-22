@@ -1,7 +1,6 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { CellAction } from "./cell-action";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
