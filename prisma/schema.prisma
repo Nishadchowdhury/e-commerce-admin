@@ -24,6 +24,7 @@ model Store {
   Size      Size[]      @relation("StoreToSize")
   Color     Color[]     @relation("StoreToColor")
   Product   Product[]   @relation("StoreToProduct")
+  Order Order[] @relation("StoreToOrder")
 }
 
 // modle for billboard
@@ -97,6 +98,8 @@ model Product {
   category   Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
   size       Size     @relation(fields: [sizeId], references: [id])
   color      Color    @relation(fields: [colorId], references: [id])
+  orderItems OrderItem[]
+  
 
   // product object
   name       String
@@ -126,4 +129,32 @@ model Image {
   uodatedAt DateTime @updatedAt
 
   @@index([productId])
+}
+
+model Order {
+  id String @id @default(uuid())
+  storeId String
+  store Store @relation("StoreToOrder", fields: [storeId], references: [id])
+
+  orderItems OrderItem[]
+  isPaid Boolean @default(false)
+  phone String @default("")
+  address String @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+}
+
+
+model OrderItem {
+   id String @id @default(uuid())
+   orderId String 
+   order Order @relation(fields: [orderId], references: [id])
+   productId String
+   product Product @relation(fields: [productId], references: [id])
+   
+
+   @@index([orderId])
+   @@index([productId])
 }

@@ -53,8 +53,6 @@ const ProductForm: React.FC<ProductFormProps> = ({
     const params = useParams()
     const router = useRouter()
 
-    console.log(initialData?.price, String(initialData?.price));
-
     const title = initialData ? "Edit product" : "Create product"
     const description = initialData ? "Edit a product" : "Add a new product"
     const toastMessage = initialData ? "Product updated" : "Product created"
@@ -113,7 +111,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
             await axios.delete(`/api/${params.storeId}/products/${params.productId}`)
             router.refresh();
             router.push(`/${params.storeId}/products`)
-            toast.success("Product delete.")
+            toast.success("Product deleted.")
         } catch (error) {
             toast.error("Make sure you removed all categories using this billboard first.");
             console.log(error);
@@ -215,11 +213,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
                             control={form.control}
                             name="categoryId"
                             render={({ field }) => {
-
                                 return (
                                     <FormItem >
                                         <FormLabel > Categories </FormLabel>
-
                                         <Select
                                             disabled={loading}
                                             onValueChange={field.onChange}
@@ -389,7 +385,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                                         </FormControl>
                                         <div className="space-y-1 leading-none">
                                             <FormLabel>
-                                                Featured
+                                                Archived
                                             </FormLabel>
                                             <FormDescription>
                                                 This product will no appear anywhere in the store.

@@ -110,19 +110,19 @@ export async function PATCH(
       });
     }
 
-    prismadb.product.update({
+    await prismadb.product.update({
       where: {
         id: params.productId,
       },
       data: {
         name,
-        images: {
-          deleteMany: {},
-        },
         price,
         categoryId,
         colorId,
         sizeId,
+        images: {
+          deleteMany: {},
+        },
         isFeatured,
         isArchived,
       },
@@ -139,9 +139,10 @@ export async function PATCH(
           },
         },
       },
-    });
+    }); // Multiple updates:- because first we deleted the images and secondly we added the new images.
 
     //I do not have to incitive with new NextResponse because I'll use NextResponse.json()
+    
     return NextResponse.json(product);
   } catch (error) {
     console.log("[product_PATCH]", error);

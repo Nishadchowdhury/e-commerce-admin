@@ -118,10 +118,10 @@ export async function GET(
         categoryId,
         colorId,
         sizeId,
-        isFeatured: isFeatured ? true : undefined,
-        isArchived: false,
+        isFeatured: isFeatured ? true : undefined, //  we do not want to pass false, sending undefined is good in this case => it will completely ignore this field. any value user send will be considered as true.
+        isArchived: false, // archived is always will be false we will not load any product that is archived.
       },
-      include: {
+      include: { // including all the relationships 
         images: true,
         category: true,
         color: true,
