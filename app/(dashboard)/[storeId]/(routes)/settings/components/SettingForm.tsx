@@ -89,7 +89,7 @@ const SettingForm: React.FC<SettingFormProps> = ({
                 loading={loading}
                 onConfirm={onDelete}
             />
-            <div className="flexC justify-between">
+            <div className="flex items-center justify-between">
                 <Heading
                     title="Setting"
                     description="Manage store preferences"

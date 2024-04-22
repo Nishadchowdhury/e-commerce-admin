@@ -16,7 +16,7 @@ const OrderClient: React.FC<clientProps> = ({ data }) => {
 
     return (
         <>
-            <div className='flexC justify-between' >
+            <div className='flex items-center justify-between' >
                 {/* head of the page */}
                 <Heading
                     title={`Orders (${data?.length})`}

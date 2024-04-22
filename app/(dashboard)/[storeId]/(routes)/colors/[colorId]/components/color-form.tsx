@@ -102,7 +102,7 @@ const ColorForm: React.FC<ColorFormProps> = ({
                 loading={loading}
                 onConfirm={onDelete}
             />
-            <div className="flexC justify-between">
+            <div className="flex items-center justify-between">
                 <Heading
                     title={title}
                     description={description}
