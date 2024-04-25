@@ -18,6 +18,9 @@ export async function GET(
       where: {
         id: params.categoryId,
       },
+      include: {
+        billboard: true,
+      },
     });
 
     //I do not have to incitive with new NextResponse because I'll use NextResponse.json()
