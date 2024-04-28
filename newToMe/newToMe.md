@@ -5,7 +5,7 @@
 ================================================================
 it provides global state _(basics)_
 
-1. we need a store to store all the state.
+1. we need a store to store all the states.
 2. we need to create+export a function like -> export const useCounterStore = create<propsType>(()=>({
    count:0,
    }))
