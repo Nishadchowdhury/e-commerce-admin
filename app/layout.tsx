@@ -7,6 +7,7 @@ import { ModalProvider } from '@/providers/modal-provider'
 import './custom.css'
 import './globals.css'
 import { ToastProvider } from '@/providers/toast-provider'
+import { ThemeProvider } from '@/providers/theme-provider'
 
 export const metadata = {
   title: 'Admin Dashboard',
@@ -22,9 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <ClerkProvider>
         <body className={inter.className}>
-          <ToastProvider />
-          <ModalProvider />
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ToastProvider />
+            <ModalProvider />
+            {children}
+          </ThemeProvider>
         </body>
       </ClerkProvider>
     </html>

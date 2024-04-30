@@ -4,6 +4,7 @@ import MainNav from "@/components/ui/custom/MainNav";
 import StoreSwitcher from "@/components/ui/custom/Store-switcher";
 import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
+import { ThemeToggle } from "../toggle-theme";
 
 
 async function Navbar() {
@@ -32,6 +33,7 @@ async function Navbar() {
                     <MainNav className="mx-6" />
 
                     <div className="ml-auto flexC space-x-4">
+                        <ThemeToggle />
                         <UserButton afterSignOutUrl="/" />
                     </div>
                 </div>
